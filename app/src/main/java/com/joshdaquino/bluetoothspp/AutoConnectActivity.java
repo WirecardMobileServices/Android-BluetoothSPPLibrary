@@ -12,31 +12,33 @@
  * limitations under the License.
  */
 
-package de.wirecard.bluetoothspp;
+package com.joshdaquino.bluetoothspp;
 
+import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.Toast;
+import com.joshdaquino.bluetoothspp.library.BluetoothSPP;
+import com.joshdaquino.bluetoothspp.library.BluetoothSPP.BluetoothConnectionListener;
+import com.joshdaquino.bluetoothspp.library.BluetoothState;
+import com.joshdaquino.bluetoothspp.library.DeviceList;
+import com.joshdaquino.bluetoothspp.library.HandReader;
 
-import de.wirecard.bluetoothspp.library.BluetoothSPP;
-import de.wirecard.bluetoothspp.library.BluetoothSPP.OnDataReceivedListener;
-import de.wirecard.bluetoothspp.library.BluetoothState;
-import de.wirecard.bluetoothspp.library.DeviceList;
-
-public class DeviceListActivity extends Activity {
+public class AutoConnectActivity extends Activity {
     BluetoothSPP bt;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_devicelist);
+        setContentView(R.layout.activity_autoconnect);
 
-        bt = new BluetoothSPP(this);
+        // Initialize Bluetooth
+        bt = new BluetoothSPP(this, HandReader.BLUEBERRY);
 
+        // Check if BT is available
         if(!bt.isBluetoothAvailable()) {
             Toast.makeText(getApplicationContext()
                     , "Bluetooth is not available"
@@ -44,10 +46,31 @@ public class DeviceListActivity extends Activity {
             finish();
         }
 
-        bt.setOnDataReceivedListener(new OnDataReceivedListener() {
-            public void onDataReceived(byte[] data, int length) {
-                Log.i("Check", "Length : " + length);
-                Log.i("Check", "Message : " + new String(data, 0, length));
+        bt.setBluetoothConnectionListener(new BluetoothConnectionListener() {
+            public void onDeviceConnected(String name, String address) {
+                Toast.makeText(getApplicationContext()
+                        , "Connected to " + name
+                        , Toast.LENGTH_SHORT).show();
+            }
+
+            public void onDeviceDisconnected() {
+                Toast.makeText(getApplicationContext()
+                        , "Connection lost"
+                        , Toast.LENGTH_SHORT).show();
+            }
+
+            public void onDeviceConnectionFailed() {
+                Log.i("Check", "Unable to connect");
+            }
+        });
+
+        bt.setAutoConnectionListener(new BluetoothSPP.AutoConnectionListener() {
+            public void onNewConnection(String name, String address) {
+                Log.i("Check", "New Connection - " + name + " - " + address);
+            }
+
+            public void onAutoConnectionStarted() {
+                Log.i("Check", "Auto menu_connection started");
             }
         });
 
@@ -57,14 +80,7 @@ public class DeviceListActivity extends Activity {
                 if(bt.getServiceState() == BluetoothState.STATE_CONNECTED) {
                     bt.disconnect();
                 } else {
-                    Intent intent = new Intent(DeviceListActivity.this, DeviceList.class);
-                    intent.putExtra("bluetooth_devices", "Bluetooth devices");
-                    intent.putExtra("no_devices_found", "No device");
-                    intent.putExtra("scanning", "Scanning");
-                    intent.putExtra("scan_for_devices", "Search");
-                    intent.putExtra("select_device", "Select");
-                    intent.putExtra("layout_list", R.layout.device_layout_list);
-                    intent.putExtra("layout_text", R.layout.device_layout_text);
+                    Intent intent = new Intent(getApplicationContext(), DeviceList.class);
                     startActivityForResult(intent, BluetoothState.REQUEST_CONNECT_DEVICE);
                 }
             }
@@ -83,7 +99,7 @@ public class DeviceListActivity extends Activity {
         } else {
             if(!bt.isServiceAvailable()) {
                 bt.setupService();
-                bt.startService(BluetoothState.DEVICE_ANDROID);
+                bt.startService(BluetoothState.DEVICE_OTHER);
                 setup();
             }
         }
@@ -112,5 +128,7 @@ public class DeviceListActivity extends Activity {
                 bt.send("Text");
             }
         });
+
+        bt.autoConnect("IOIO");
     }
 }

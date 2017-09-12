@@ -8,6 +8,7 @@ android {
     defaultConfig {
         versionCode Integer.parseInt(VERSION_CODE)
         versionName VERSION_NAME
+        minSdkVersion 9
     }
 
     sourceSets {

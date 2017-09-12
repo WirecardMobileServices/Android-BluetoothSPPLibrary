@@ -1,15 +1,13 @@
 Android-BluetoothSPPLibrary
 ===========================
+[![](https://jitpack.io/v/joshdaquino/Android-BluetoothSPPLibrary.svg)](https://jitpack.io/#joshdaquino/Android-BluetoothSPPLibrary)
 
 
-![BluetoothSPP Library](https://raw.githubusercontent.com/mposSVK/Android-BluetoothSPPLibrary/master/image/header.png)
+![BluetoothSPP Library](https://raw.githubusercontent.com/joshdaquino/Android-BluetoothSPPLibrary/master/image/header.png)
 
+This fork is aimed to help with the connection between Android and Bluetooth RFID Hand Readers.
 
-Bluetooth Serial Port Profile which comfortable to developer application to communication with microcontroller or android device via bluetooth.
-
-This libraly include all important methods for serial port profile on bluetooth communication. It has built-in bluetooth device list.
-
-
+This library includes all important methods for serial port profile on bluetooth communication.
 
 Feature
 --------------
@@ -38,7 +36,7 @@ allprojects {
 ```
 Add the dependency:
 ```
-compile 'com.github.mposSVK:Android-BluetoothSPPLibrary:master-SNAPSHOT'
+compile 'com.github.joshdaquino:Android-BluetoothSPPLibrary:master-SNAPSHOT'
 ```
 
 
@@ -59,7 +57,7 @@ For Android Studio : Use Gradle to download this library from Maven
 
 • Declare BluetoothSPP like this
 ```java
-BluetoothSPP bt = new BluetoothSPP(Context);
+BluetoothSPP bt = new BluetoothSPP(Context, HandReader);
 ```
 
 • Check if bluetooth is now available
@@ -83,25 +81,11 @@ public void onStart() {
 
 • if bluetooth is ready call this method to start service
 
-For connection with android device 
-```java
-bt.startService(BluetoothState.DEVICE_ANDROID);
-```
 
-
-![Communicate with android](https://raw.githubusercontent.com/mposSVK/Android-BluetoothSPPLibrary/master/image/Connection.png)
-
-
-For connection with any microcontroller which communication with bluetooth serial port profile module
+For connection with any RFID Hand Reader which communication with bluetooth serial port profile module
 ```java
 bt.startService(BluetoothState.DEVICE_OTHER);
 ```
-
-
-![Communicate with microcontroller](https://raw.githubusercontent.com/mposSVK/Android-BluetoothSPPLibrary/master/image/Connection2.png)
-
-
-![Bluetooth module with SPP](https://raw.githubusercontent.com/mposSVK/Android-BluetoothSPPLibrary/master/image/BlueStick.png)
 
 
 • Stop service with
@@ -248,18 +232,18 @@ button with id name = "button_scan"
 </RelativeLayout>
 ```
 
-![Custom Device List Layout](https://raw.githubusercontent.com/mposSVK/Android-BluetoothSPPLibrary/master/image/005.png)
+![Custom Device List Layout](https://raw.githubusercontent.com/joshdaquino/Android-BluetoothSPPLibrary/master/image/005.png)
 
 
 But if you don't need to create layout file. You just want to change only text on device list layout. You can use bundle to change text on device list
 
-![Custom Device List Text](https://raw.githubusercontent.com/mposSVK/Android-BluetoothSPPLibrary/master/image/006.png)
+![Custom Device List Text](https://raw.githubusercontent.com/joshdaquino/Android-BluetoothSPPLibrary/master/image/006.png)
 
-![Custom Device List Text](https://raw.githubusercontent.com/mposSVK/Android-BluetoothSPPLibrary/master/image/007.png)
+![Custom Device List Text](https://raw.githubusercontent.com/joshdaquino/Android-BluetoothSPPLibrary/master/image/007.png)
 
-![Custom Device List Text](https://raw.githubusercontent.com/mposSVK/Android-BluetoothSPPLibrary/master/image/008.png)
+![Custom Device List Text](https://raw.githubusercontent.com/joshdaquino/Android-BluetoothSPPLibrary/master/image/008.png)
 
-![Custom Device List Text](https://raw.githubusercontent.com/mposSVK/Android-BluetoothSPPLibrary/master/image/009.png)
+![Custom Device List Text](https://raw.githubusercontent.com/joshdaquino/Android-BluetoothSPPLibrary/master/image/009.png)
 
 ```java
 Intent intent = new Intent(getApplicationContext(), DeviceList.class);
@@ -271,14 +255,14 @@ intent.putExtra("select_device", "Select");
 startActivityForResult(intent, BluetoothState.REQUEST_CONNECT_DEVICE);
 ```
 
-![Custom Device List Text](https://raw.githubusercontent.com/mposSVK/Android-BluetoothSPPLibrary/master/image/010.png)
+![Custom Device List Text](https://raw.githubusercontent.com/joshdaquino/Android-BluetoothSPPLibrary/master/image/010.png)
 
 
 
 License
 --------------
 
-Copyright (c) 2017 Wirecard
+Copyright (c) 2017 joshdaquino
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

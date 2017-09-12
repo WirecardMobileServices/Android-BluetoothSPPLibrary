@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="de.wirecard.bluetoothspp" >
+    package="com.joshdaquino.bluetoothspp" >
 
     <application
         android:allowBackup="true"
@@ -8,7 +8,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="de.wirecard.bluetoothspp.Main"
+            android:name="com.joshdaquino.bluetoothspp.Main"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -17,22 +17,22 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="de.wirecard.bluetoothspp.SimpleActivity"
+            android:name="com.joshdaquino.bluetoothspp.SimpleActivity"
             android:label="@string/app_name" />
         <activity
-            android:name="de.wirecard.bluetoothspp.ListenerActivity"
+            android:name="com.joshdaquino.bluetoothspp.ListenerActivity"
             android:label="@string/title_activity_listener" >
         </activity>
         <activity
-            android:name="de.wirecard.bluetoothspp.AutoConnectActivity"
+            android:name="com.joshdaquino.bluetoothspp.AutoConnectActivity"
             android:label="@string/title_activity_auto_connect" >
         </activity>
         <activity
-            android:name="de.wirecard.bluetoothspp.DeviceListActivity"
+            android:name="com.joshdaquino.bluetoothspp.DeviceListActivity"
             android:label="@string/title_activity_device_list" >
         </activity>
         <activity
-            android:name="de.wirecard.bluetoothspp.TerminalActivity"
+            android:name="com.joshdaquino.bluetoothspp.TerminalActivity"
             android:label="@string/title_activity_terminal" >
         </activity>
     </application>

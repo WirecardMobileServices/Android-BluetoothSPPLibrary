@@ -1,4 +1,4 @@
-package de.wirecard.bluetoothspp;
+package com.joshdaquino.bluetoothspp;
 
 import android.app.Activity;
 import android.content.Intent;

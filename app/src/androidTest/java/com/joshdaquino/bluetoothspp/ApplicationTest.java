@@ -1,4 +1,4 @@
-package de.wirecard.bluetoothspp.library;
+package com.joshdaquino.bluetoothspp;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-package de.wirecard.bluetoothspp;
+package com.joshdaquino.bluetoothspp;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -23,13 +23,14 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.Toast;
 
-import de.wirecard.bluetoothspp.library.BluetoothSPP;
-import de.wirecard.bluetoothspp.library.BluetoothSPP.AutoConnectionListener;
-import de.wirecard.bluetoothspp.library.BluetoothSPP.BluetoothConnectionListener;
-import de.wirecard.bluetoothspp.library.BluetoothSPP.BluetoothStateListener;
-import de.wirecard.bluetoothspp.library.BluetoothSPP.OnDataReceivedListener;
-import de.wirecard.bluetoothspp.library.BluetoothState;
-import de.wirecard.bluetoothspp.library.DeviceList;
+import com.joshdaquino.bluetoothspp.library.BluetoothSPP;
+import com.joshdaquino.bluetoothspp.library.BluetoothSPP.AutoConnectionListener;
+import com.joshdaquino.bluetoothspp.library.BluetoothSPP.BluetoothConnectionListener;
+import com.joshdaquino.bluetoothspp.library.BluetoothSPP.BluetoothStateListener;
+import com.joshdaquino.bluetoothspp.library.BluetoothSPP.OnDataReceivedListener;
+import com.joshdaquino.bluetoothspp.library.BluetoothState;
+import com.joshdaquino.bluetoothspp.library.DeviceList;
+import com.joshdaquino.bluetoothspp.library.HandReader;
 
 public class ListenerActivity extends Activity {
     BluetoothSPP bt;
@@ -38,7 +39,7 @@ public class ListenerActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listener);
 
-        bt = new BluetoothSPP(this);
+        bt = new BluetoothSPP(this, HandReader.BLUEBERRY);
 
         if(!bt.isBluetoothAvailable()) {
             Toast.makeText(getApplicationContext()
